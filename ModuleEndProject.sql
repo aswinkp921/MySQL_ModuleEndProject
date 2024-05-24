@@ -1,14 +1,12 @@
 create database library;
 use library;
-drop database library;
+
 create table Branch(
 Branch_no int primary key, 
 Manager_Id int,
 Branch_address varchar(20),
 Contact_no bigint
 );
-
-select * from branch;
 
 create table Employee(
 Emp_Id int primary key, 
@@ -18,8 +16,6 @@ Salary int,
 Branch_no int,
 foreign key (Branch_no) references Branch(Branch_no)
 );
-
-select * from employee;
 
 create table Books(
 ISBN varchar(20) primary key,
@@ -31,16 +27,12 @@ Author varchar(30),
 Publisher varchar(50)
 );
 
-select * from books;
-
 create table Customer(
 Customer_Id int primary key,
 Customer_name varchar(20),
 Customer_address varchar(20),
 Reg_date date
 );
-
-select * from customer;
 
 Create table  IssueStatus(Issue_id int primary key,
 Issued_cust int,
@@ -51,9 +43,6 @@ Isbn_book varchar(50),
 foreign key(Isbn_book) references Books(ISBN)
 );
 
-select * from IssueStatus;
-
-
 create table ReturnStatus(
 Return_Id int primary key,
 Return_cust varchar(20),
@@ -62,7 +51,8 @@ Return_date date,
 isbn_book2 varchar(20),
 foreign key (isbn_book2) references Books(isbn)
 );
-select * from ReturnStatus;
+
+-- Insert values into Branch table
 
 insert into Branch(Branch_no,Manager_Id,Branch_address,Contact_no)
 values
@@ -73,6 +63,8 @@ values
 (5,105,'Kolkata',9895391143);
 
 select * from Branch;
+
+-- Insert values into Employee table
 
 insert into Employee(Emp_id,Emp_name ,Position,Salary,Branch_no)
 values
@@ -91,7 +83,8 @@ values
 (213,'Hannah','Librarian',34000,4);
 
 select * from Employee;
-desc books;
+
+-- Insert values into Books table
 
 insert into Books (ISBN, Book_title, Category, Rental_Price, Status, Author, Publisher) values
 ('978-0-06-112008-4', 'To Kill a Mockingbird', 'Fiction', 100, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.'),
@@ -111,7 +104,7 @@ insert into Books (ISBN, Book_title, Category, Rental_Price, Status, Author, Pub
 ('978-0-374-53012-4', 'Leaves of Grass', 'Poems', 100, 'yes', 'Walt Whitman', 'Dover Publications');
 
 select * from books;
-desc Customer;
+
 
 -- Insert values into Customer table
 
@@ -133,9 +126,10 @@ insert into Customer (Customer_Id, Customer_name, Customer_address, Reg_date) va
 (1015, 'Alexander', '333 Cedar St', '2023-03-15');
 
 select * from customer;
-desc IssueStatus;
 
--- Insert values into IssueStatus table with valid Issued_cust and Isbn_book values
+
+-- Insert values into IssueStatus table 
+
 insert into IssueStatus (Issue_Id, Issued_cust, Issued_book_name, Issue_date, Isbn_book) values
 (301,1002, 'To Kill a Mockingbird', '2023-05-20', '978-0-06-112008-4'),
 (302, 1002, '1984', '2023-05-21', '978-0-452-28423-4'),
@@ -155,7 +149,9 @@ insert into IssueStatus (Issue_Id, Issued_cust, Issued_book_name, Issue_date, Is
 
 select * from IssueStatus;
 
-insert into ReturnStatus (Return_Id, Return_cust, Return_book_name, Return_date, Isbn_book2) values
+-- Insert values into ReturnStatus table 
+
+insert into  (Return_Id, Return_cust, Return_book_name, Return_date, Isbn_book2) values
 (401, 1002, 'To Kill a Mockingbird', '2023-05-30', '978-0-06-112008-4'),
 (402, 1002, '1984', '2023-05-31', '978-0-452-28423-4'),
 (403, 1003, 'The Great Gatsby', '2023-06-01', '978-0-7432-7356-5'),
